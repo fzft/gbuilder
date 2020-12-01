@@ -44,7 +44,7 @@ func (fm *FileMaker) GitIgnore() error {
 		"*.out\n" +
 		"\n" +
 		"# Dependency directories (remove the comment below to include it)\n" +
-		"# vendor/\n")
+		"vendor/\n")
 
 	err := ioutil.WriteFile(path.Join(fm.projPath, GIT_IGNORE), gitignoreTemplate, fm.modePerm)
 	if err != nil {
@@ -58,7 +58,7 @@ func (fm *FileMaker) ReadME() error {
 
 	readMeTemplate := []byte(fmt.Sprintf("# %v\n", fm.project) +
 		"\n" +
-		"[comment]: logo position\n" +
+		"<!---logo position--->\n" +
 		"\n" +
 		"## Installing\n" +
 		"\n" +
@@ -95,7 +95,8 @@ func (fm *FileMaker) ReadME() error {
 		"\n" +
 		fmt.Sprintf("%v \n   github@%v.com", fm.author, fm.author) +
 		"\n" +
-		"## License\n")
+		"## License\n" +
+		"Source code is available under the MIT [License](/LICENSE).\n")
 
 	err := ioutil.WriteFile(path.Join(fm.projPath, README), readMeTemplate, fm.modePerm)
 	if err != nil {

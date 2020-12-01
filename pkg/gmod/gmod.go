@@ -48,14 +48,9 @@ func GOVNew() (*GoVersion, error) {
 }
 
 func (gv *GoVersion) GoMod(projpath string) error {
-	_, err := cmd.NewCmd("cd", projpath).Run()
+	_, err := cmd.NewCmd("/bin/sh", "-c", fmt.Sprintf("cd %v; go mod init", projpath)).Run()
 	if err != nil {
 		log.Fatalf("failed to cd to Path %v\n", err)
-		return err
-	}
-	_, err = cmd.NewCmd("go", "mod", "init").Run()
-	if err != nil {
-		log.Fatalf("failed to run go mod init %v\n", err)
 		return err
 	}
 	return nil
